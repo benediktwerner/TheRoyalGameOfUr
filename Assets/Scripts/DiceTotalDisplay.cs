@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class DiceTotalDisplay : MonoBehaviour {
@@ -7,10 +7,12 @@ public class DiceTotalDisplay : MonoBehaviour {
 	}
 
 	void OnDiceChanged(int newValue) {
-		if (newValue == -1) {
+		GetComponent<Text>().text = "= " + newValue;
+	}
+
+	void Update() {
+		if (!GameController.Instance.IsAnimating && GameController.Game.DiceValue == -1) {
 			GetComponent<Text>().text = "= ?";
-		} else {
-			GetComponent<Text>().text = "= " + newValue;
 		}
 	}
 }

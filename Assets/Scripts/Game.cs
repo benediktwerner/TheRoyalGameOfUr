@@ -19,9 +19,9 @@ public class Game {
 
 	Random random = new Random();
 
-	public event System.Action<int> DiceChangedEvent;
-	public event System.Action<int, int> StoneMovedEvent;
-	public event System.Action<int> StoneKilledEvent;
+	public event Action<int> DiceChangedEvent;
+	public event Action<int, int> StoneMovedEvent;
+	public event Action<int> StoneKilledEvent;
 
 	public Game() {
 		Board = CreateBoard();
@@ -31,14 +31,14 @@ public class Game {
 	public int RollDice() {
 		if (IsGameOver() || DiceValue >= 0)
 			return -1;
-		
+
 		DiceValue = 0;
 		for (int i = 0; i < 4; i++)
 			DiceValue += random.Next(2);
-		
+
 		if (DiceChangedEvent != null)
 			DiceChangedEvent(DiceValue);
-		
+
 		if (GetLegalMoves().Length == 0) {
 			NextPlayer();
 			// Debug.Log("No legal moves! Next Player");
@@ -56,7 +56,7 @@ public class Game {
 
 		if (position < 0) StonesAtHome[CurrPlayer]--;
 		else Board[CurrPlayer, position].PlayerStone = Tile.EMPTY;
-		
+
 		if (targetPosition == TILE_COUNT) {
 			Scores[CurrPlayer]++;
 			NextPlayer();

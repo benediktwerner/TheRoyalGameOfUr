@@ -18,12 +18,16 @@ public class GameController : MonoBehaviour {
 	public PlayerType player1Type;
 	public PlayerType player2Type;
 
+	public float animationSpeed = 0.2f;
+
+	[HideInInspector]
 	public int AnimationsPlaying = 0;
 	public bool IsAnimating { get { return AnimationsPlaying != 0; } }
 
 	public GameController () {
 		_game = new Game();
 		Instance = this;
+
 	}
 
 	void Start() {
@@ -35,6 +39,8 @@ public class GameController : MonoBehaviour {
 			GetPlayerFromPlayerType(player1Type),
 			GetPlayerFromPlayerType(player2Type)
 		};
+
+		PlayerStone.smoothTime = animationSpeed;
 	}
 
 
@@ -49,6 +55,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RollDice() {
+		if (IsAiPlayer())
+			return;
+
 		_game.RollDice();
 	}
 

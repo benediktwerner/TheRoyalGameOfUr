@@ -11,7 +11,8 @@ public class PlayerStone : MonoBehaviour {
 	Vector3 targetPosition;
 	Vector3 velocity;
 	bool isAnimating = false;
-	float smoothTime = 0.2f;
+
+	public static float smoothTime = 0.2f;
 	float smoothDistance = 0.05f;
 	const float smoothHeight = 0.5f;
 	Vector3 smoothUp = smoothHeight * Vector3.up;
